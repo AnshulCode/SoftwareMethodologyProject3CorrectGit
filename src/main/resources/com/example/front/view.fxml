@@ -41,14 +41,15 @@
                                         <RadioButton fx:id="CC" layoutX="-1.0" layoutY="57.0" mnemonicParsing="false" onAction="#getAccountType" text="CollegeChecking" toggleGroup="$acctTypes" />
                                         <RadioButton fx:id="S" layoutY="83.0" mnemonicParsing="false" onAction="#getAccountType" text="Savings" toggleGroup="$acctTypes" />
                                         <RadioButton fx:id="MM" layoutY="5.0" mnemonicParsing="false" onAction="#getAccountType" text="MoneyMarket" toggleGroup="$acctTypes" />
+                              <Button fx:id="enterCmd" layoutX="117.0" layoutY="88.0" mnemonicParsing="false" onAction="#onClick" text="Action" />
                                     </children>
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <Button layoutX="262.0" layoutY="421.0" mnemonicParsing="false" text="OUIT" />
+
                         <TextField fx:id="campusCode" layoutX="14.0" layoutY="192.0" />
                         <Text layoutX="14.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Campus Code" />
-                        <Button fx:id="executeButton" layoutX="258.0" layoutY="387.0" mnemonicParsing="false" onAction="#execute" text="Action" />
+
                         <TextField fx:id="loyalty" layoutX="14.0" layoutY="235.0" />
                         <Text layoutX="13.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loyalty" />
                   <TextField id="name" fx:id="nameInput1" layoutX="14.0" layoutY="65.0" />

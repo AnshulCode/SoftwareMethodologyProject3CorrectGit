@@ -15,7 +15,7 @@ public class HelloController {
     public TextField nameInput,nameInput1,dateInput,amountInput,campusCode,loyalty;
 
     @FXML
-    public Button executeButton;
+    public Button enterCmd;
 
     @FXML
     public RadioButton O,D,P,PI,UB,C,PT,W;
@@ -28,8 +28,8 @@ public class HelloController {
     private boolean isOpencmd;
 
     @FXML
-    public void execute(ActionEvent buttonOnClicked){
-        if(buttonOnClicked.getSource() == executeButton){
+    public void onClick(ActionEvent buttonOnClicked){
+        if(buttonOnClicked.getSource() == enterCmd){
             if((cmd == null || acctType == null || nameInput1.getText() == null || nameInput.getText() == null ||
                     dateInput.getText() == null ||
                     amountInput.getText() == null)&&!(isCloseCmd||isPrintCmd)){
@@ -49,40 +49,40 @@ public class HelloController {
         }
     }
     public void getAccountType(ActionEvent event){
-            if(cmd == null || isOpencmd){
-                if(event.getSource() == MM){
-                    acctType = ("Money Market");
-                    moneyMarketAndCheckingState();
-                }
-                if(event.getSource() == CC){
-                    acctType = ("College Checking");
-                    this.collegeCheckingState();
-                }
-                if(event.getSource() == Checking){
-                    acctType = "Checking";
-                    this.moneyMarketAndCheckingState();
-                }
-                if(event.getSource() == S){
-                    acctType = ("Savings");
-                    this.savingsState();
-                }
-                if (isCloseCmd) {
-                    this.closeState();
-                }
-            }else{
-
-                if(event.getSource() == MM){
-                    acctType = ("Money Market");
-                }else if(event.getSource() == CC){
-                    acctType = ("College Checking");
-                }else if(event.getSource() == Checking){
-                    acctType = "Checking";
-                }else if(event.getSource() == S){
-                    acctType = ("Savings");
-                }else if (isCloseCmd) {
-                    this.closeState();
-                }
+        if(cmd == null || isOpencmd){
+            if(event.getSource() == MM){
+                acctType = ("Money Market");
+                moneyMarketAndCheckingState();
             }
+            if(event.getSource() == CC){
+                acctType = ("College Checking");
+                this.collegeCheckingState();
+            }
+            if(event.getSource() == Checking){
+                acctType = "Checking";
+                this.moneyMarketAndCheckingState();
+            }
+            if(event.getSource() == S){
+                acctType = ("Savings");
+                this.savingsState();
+            }
+            if (isCloseCmd) {
+                this.closeState();
+            }
+        }else{
+
+            if(event.getSource() == MM){
+                acctType = ("Money Market");
+            }else if(event.getSource() == CC){
+                acctType = ("College Checking");
+            }else if(event.getSource() == Checking){
+                acctType = "Checking";
+            }else if(event.getSource() == S){
+                acctType = ("Savings");
+            }else if (isCloseCmd) {
+                this.closeState();
+            }
+        }
 
 
     }
