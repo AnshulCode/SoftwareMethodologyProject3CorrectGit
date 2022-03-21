@@ -20,6 +20,8 @@ public class HelloController {
     @FXML
     public RadioButton O,D,P,PI,UB,C,PT,W;
 
+    private Model model = new Model();
+
     private String acctType;
     private String cmd;
     private boolean isCloseCmd;
@@ -36,7 +38,6 @@ public class HelloController {
                 System.out.println("Improper data");
             }
             selectCommand();
-
         }else{
             System.exit(0);
         }
@@ -44,8 +45,34 @@ public class HelloController {
     private void selectCommand(){
         try{
             double amount = Double.parseDouble(amountInput.getText());
+            String loyal = null;
+            String campus = null;
+            Date dob = new Date(dateInput.getText());
+            if(!dob.isValid()){
+                System.out.println("Date of birth invalid");
+                return;
+            }else if(acctType.equals("College Checking")){
+                if(campusCode.getText()== null){
+                    System.out.println("Not enough");
+                    return;
+                }
+                loyal = campusCode.getText();
+            }else if(acctType.equals("Savings")){
+                if(campusCode.getText()== null){
+                    System.out.println("Not enough");
+                    return;
+                }
+                campus = campusCode.getText();
+            }
+
         }catch(NumberFormatException e){
-            System.out.println();
+            System.out.println("Invalid Amount");
+        }
+    }
+    public void cleanUpExeptions(double amount , String loyal ,String code ){
+        if (loyal == null && code== null) {
+            model.add(amount,loyal,code,acctType);
+        }else if(loyal != null){
         }
     }
     public void getAccountType(ActionEvent event){

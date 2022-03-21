@@ -6,6 +6,10 @@ public class Model {
     public Model(){
         this.db = new AccountDatabase();
     }
+
+    public void add(double amount, String loyal,String code, String acctType){
+
+    }
     private Account createAccount( ){
         return null;
     }
