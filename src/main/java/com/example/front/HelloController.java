@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 public class HelloController {
 
@@ -14,15 +15,39 @@ public class HelloController {
     public TextField nameInput,nameInput1,dateInput,amountInput,campusCode,loyalty;
 
     @FXML
+    public Button executeButton;
+
+    @FXML
     public RadioButton O,D,P,PI,UB,C,PT,W;
 
     private String acctType;
     private String cmd;
     private boolean isCloseCmd;
     private boolean isCmdInPlaceState;
+    private boolean isPrintCmd;
     private boolean isOpencmd;
 
+    @FXML
+    public void execute(ActionEvent buttonOnClicked){
+        if(buttonOnClicked.getSource() == executeButton){
+            if((cmd == null || acctType == null || nameInput1.getText() == null || nameInput.getText() == null ||
+                    dateInput.getText() == null ||
+                    amountInput.getText() == null)&&!(isCloseCmd||isPrintCmd)){
+                System.out.println("Improper data");
+            }
+            selectCommand();
 
+        }else{
+            System.exit(0);
+        }
+    }
+    private void selectCommand(){
+        try{
+            double amount = Double.parseDouble(amountInput.getText());
+        }catch(NumberFormatException e){
+            System.out.println();
+        }
+    }
     public void getAccountType(ActionEvent event){
             if(cmd == null || isOpencmd){
                 if(event.getSource() == MM){
@@ -157,27 +182,26 @@ public class HelloController {
             }
         }
     }
+    private void setBooleans(){
+        isCloseCmd = true;
+        isCmdInPlaceState = true;
+        isOpencmd = false;
+    }
     public void getCmd(ActionEvent event){
         if(event.getSource() == C){
             this.cmd = "C";
             closeState();
-            isCloseCmd = true;
-            isCmdInPlaceState = true;
-            isOpencmd = false;
+            setBooleans();
         }
         if (event.getSource() == D) {
             this.cmd = "D";
             this.depositState();
-            isCloseCmd = false;
-            isCmdInPlaceState = true;
-            isOpencmd = false;
+            setBooleans();
         }
         if(event.getSource() == W){
             this.cmd = "W";
             this.depositState();
-            isCloseCmd = false;
-            isCmdInPlaceState = true;
-            isOpencmd = false;
+            setBooleans();
         }
         if(event.getSource() == O){
             this.cmd = "O";
@@ -191,29 +215,12 @@ public class HelloController {
             this.printState();
             isCloseCmd = false;
             isOpencmd = false;
+            isPrintCmd = true;
         }
 
     }
-    private void withdrawState(){
-        this.moneyMarketAndCheckingState();
-    }
-    private void changeState(String acctType){
-        if(acctType != null){
-            if(acctType.equals("Money Market")){
-                this.moneyMarketAndCheckingState();
-            }else if(acctType.equals("Checking")){
-                this.moneyMarketAndCheckingState();
-            }else if(acctType.equals("Savings")){
-                this.savingsState();
-            }else if(acctType.equals("College Checking")){
-                this.collegeCheckingState();
-            }
-        }else{
-            this.resetState();
-        }
-        this.campusCode.setDisable(true);
-        this.loyalty.setDisable(true);
-    }
+
+
 
 
 
