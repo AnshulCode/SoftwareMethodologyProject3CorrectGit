@@ -3,6 +3,7 @@ package com.example.front;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 
@@ -13,6 +14,10 @@ public class HelloController {
 
     @FXML
     public TextField nameInput,nameInput1,dateInput,amountInput,campusCode,loyalty;
+
+    @FXML
+    public TextArea outputText;
+
 
     @FXML
     public Button enterCmd;
@@ -29,52 +34,95 @@ public class HelloController {
     private boolean isPrintCmd;
     private boolean isOpencmd;
 
+
     @FXML
     public void onClick(ActionEvent buttonOnClicked){
         if(buttonOnClicked.getSource() == enterCmd){
             if((cmd == null || acctType == null || nameInput1.getText() == null || nameInput.getText() == null ||
                     dateInput.getText() == null ||
                     amountInput.getText() == null)&&!(isCloseCmd||isPrintCmd)){
-                System.out.println("Improper data");
+                    outputText.setText("Improper data");
+                    return;
             }
             selectCommand();
         }else{
             System.exit(0);
         }
     }
+    private boolean checkLoyaltyCode(){
+        if(loyalty.getText()== null){
+            outputText.setText("Improper Loyalty Code");
+            return false;
+        }
+
+        try {
+            int isLoyal = Integer.parseInt(loyalty.getText());
+            if (!(isLoyal != 0 || isLoyal != 1)) {
+                outputText.setText("Improper Loyalty Code");
+                return false;
+            }
+        }catch(NumberFormatException e){
+            outputText.setText("Improper Loyalty Code");
+            return false;
+        }
+        return true;
+    }
+    private boolean checkCampusCode(){
+        if(campusCode.getText()== null){
+            outputText.setText("Improper Campus Code");
+            return false;
+        }
+        try {
+            int code = Integer.parseInt(campusCode.getText());
+            if (!(code != 0 || code != 1 || code != 2)) {
+                outputText.setText("Improper Campus Code");
+                return false;
+            }
+        }catch(NumberFormatException e){
+            outputText.setText("Improper Campus Code");
+            return false;
+        }
+        return true;
+    }
     private void selectCommand(){
+        System.out.println(acctType);
         try{
             double amount = Double.parseDouble(amountInput.getText());
             String loyal = null;
             String campus = null;
             Date dob = new Date(dateInput.getText());
             if(!dob.isValid()){
-                System.out.println("Date of birth invalid");
+                outputText.setText("isDateValid");
                 return;
-            }else if(acctType.equals("College Checking")){
-                if(campusCode.getText()== null){
-                    System.out.println("Not enough");
+            }else if(acctType.equals("College Checking") && cmd.equals("O")){
+                if(!checkCampusCode()){
                     return;
                 }
-                loyal = campusCode.getText();
-            }else if(acctType.equals("Savings")){
-                if(campusCode.getText()== null){
-                    System.out.println("Not enough");
+                cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
+                        amount,Integer.parseInt(campusCode.getText()),dateInput.getText(),0,acctType);
+            }else if(acctType.equals("Savings")&&cmd.equals("O")){
+                if(!checkLoyaltyCode()){
                     return;
                 }
-                campus = campusCode.getText();
+                cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
+                        amount,Integer.parseInt(loyalty.getText()),dateInput.getText(),0,acctType);
+            }else{
+                cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
+                        amount,0,dateInput.getText(),0,acctType);
             }
 
         }catch(NumberFormatException e){
-            System.out.println("Invalid Amount");
+            outputText.setText("Invalid Amount");
         }
     }
-    public void cleanUpExeptions(double amount , String loyal ,String code ){
-        if (loyal == null && code== null) {
-            model.add(amount,loyal,code,acctType);
-        }else if(loyal != null){
+    public void cleanUpExeptions(String fname, String lname, double amount, int loyal,String date,
+                                 int code, String acctType){
+        if(cmd.equals("O")){
+            System.out.println(model.open(fname,lname,amount,loyal,date,code,acctType));
         }
+
     }
+
     public void getAccountType(ActionEvent event){
         if(cmd == null || isOpencmd){
             if(event.getSource() == MM){
@@ -199,8 +247,8 @@ public class HelloController {
         this.S.setDisable(false);
     }
     public void changeState() {
-        if(acctType != null) {
-            if (acctType.equals("Money Market") || acctType.equals("Checking")) {
+        if(this.acctType != null) {
+            if (this.acctType.equals("Money Market") || this.acctType.equals("Checking")) {
                 moneyMarketAndCheckingState();
             } else if (acctType.equals("Savings")) {
                 savingsState();
@@ -217,21 +265,25 @@ public class HelloController {
     public void getCmd(ActionEvent event){
         if(event.getSource() == C){
             this.cmd = "C";
+            resetState();
             closeState();
             setBooleans();
         }
         if (event.getSource() == D) {
             this.cmd = "D";
+            resetState();
             this.depositState();
             setBooleans();
         }
         if(event.getSource() == W){
             this.cmd = "W";
+            resetState();
             this.depositState();
             setBooleans();
         }
         if(event.getSource() == O){
             this.cmd = "O";
+            resetState();
             this.changeState();
             isOpencmd  = true;
             isCloseCmd = false;
