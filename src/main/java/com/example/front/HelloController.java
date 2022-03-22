@@ -85,36 +85,44 @@ public class HelloController {
         }
         return true;
     }
+    private boolean dateCheck(String dob){
+        Date DOB = new Date(dateInput.getText());
+        Date curr = new Date();
+        if(!DOB.isValid()){
+            return false;
+        }else if(curr.compareTo(DOB)<= 0){
+            return false;
+        }
+        return true;
+    }
     private void selectCommand(){
-        System.out.println(acctType);
         try{
             double amount = Double.parseDouble(amountInput.getText());
             String loyal = null;
             String campus = null;
-            Date dob = new Date(dateInput.getText());
-            if(!dob.isValid()){
-                outputText.setText("isDateValid");
-                return;
-            }else if(acctType.equals("College Checking") && cmd.equals("O")){
-                if(!checkCampusCode()){
+                if(!dateCheck(dateInput.getText())){
+                    outputText.setText("Date of birth invalid");
                     return;
                 }
+                if(acctType.equals("College Checking") && cmd.equals("O")){
+                    if(!checkCampusCode()){
+                        return;
+                    }
                 cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
                         amount,Integer.parseInt(campusCode.getText()),dateInput.getText(),0,acctType);
-            }else if(acctType.equals("Savings")&&cmd.equals("O")){
-                if(!checkLoyaltyCode()){
-                    return;
-                }
+                }else if(acctType.equals("Savings")&&cmd.equals("O")){
+                    if(!checkLoyaltyCode()){
+                        return;
+                    }
                 cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
                         amount,Integer.parseInt(loyalty.getText()),dateInput.getText(),0,acctType);
-            }else{
-                cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
+                }else{
+                    cleanUpExeptions(nameInput.getText(), nameInput1.getText(),
                         amount,0,dateInput.getText(),0,acctType);
+                }
+            }catch(NumberFormatException e){
+                outputText.setText("Invalid Amount");
             }
-
-        }catch(NumberFormatException e){
-            outputText.setText("Invalid Amount");
-        }
     }
     public void cleanUpExeptions(String fname, String lname, double amount, int loyal,String date,
                                  int code, String acctType){
@@ -154,7 +162,6 @@ public class HelloController {
                 this.closeState();
             }
         }else{
-
             if(event.getSource() == MM){
                 acctType = ("Money Market");
             }else if(event.getSource() == CC){
