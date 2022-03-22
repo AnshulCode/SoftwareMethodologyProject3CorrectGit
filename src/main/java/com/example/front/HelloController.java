@@ -35,6 +35,7 @@ public class HelloController {
     private boolean isOpencmd;
 
 
+
     @FXML
     public void onClick(ActionEvent buttonOnClicked){
         if(buttonOnClicked.getSource() == enterCmd){
@@ -121,6 +122,12 @@ public class HelloController {
             outputText.setText(model.open(fname,lname,amount,loyal,date,code,acctType));
         }else if(isPrintCmd){
             outputText.setText(model.printCmd(cmd));
+        }else if(cmd.equals("C")){
+            outputText.setText(model.close(fname,lname,date,acctType));
+        }else if(cmd.equals("D")){
+            outputText.setText(model.deposit(acctType,fname,lname,date,amount));
+        }else{
+            outputText.setText(model.withdraw(acctType,fname,lname,date,amount));
         }
 
     }

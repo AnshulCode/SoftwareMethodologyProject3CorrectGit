@@ -37,16 +37,7 @@ public class Model {
     }
 
     public String close(String fname,String lname, String dob, String acctType){
-        Account close = null;
-        if(acctType.equals("Checking")){
-            close = new Checking(new Profile(fname,lname,dob),0);
-        }else if(acctType.equals("Money Market")){
-            close = new MoneyMarket(new Profile(fname,lname,dob),0);
-        }else if(acctType.equals("Money Market")){
-            close = new Savings(new Profile(fname,lname,dob),0,1);
-        }else if(acctType.equals("College Checking")){
-            close = new CollegeChecking(new Profile(fname,lname,dob),0,1);
-        }
+        Account close = setAccount(acctType,fname,lname,dob,0);
         if(!db.close(close)){
             if (db.publicFind(close) != null) {
                 Account found = db.publicFind(close);
@@ -67,6 +58,51 @@ public class Model {
         }
 
         return "Account Closed";
+    }
+    public  Account setAccount(String acctType,String fname, String lname,String dob,double amount){
+        if(acctType.equals("Checking")){
+            return new Checking(new Profile(fname,lname,dob),amount);
+        }else if(acctType.equals("Money Market")){
+            return new MoneyMarket(new Profile(fname,lname,dob),amount);
+        }else if(acctType.equals("Money Market")){
+            return new Savings(new Profile(fname,lname,dob),amount,1);
+        }else if(acctType.equals("College Checking")){
+            return new CollegeChecking(new Profile(fname,lname,dob),amount,1);
+        }
+        return null;
+    }
+    public String deposit(String acctType,String fname,String lname,String dob, double amount){
+        Account deposit = setAccount(acctType,fname,lname,dob,amount);
+        if(amount<=0){
+            return "Deposit - cannot be 0 or negative.";
+        }
+
+        if (db.publicFind(deposit) == null) {
+            return (deposit.getHolder().toString() + " " +
+                    deposit.getType() + " is not in the database.");
+        }
+        if (db.publicFind(deposit).isClosed()) {
+            return ("Account closed.");
+        }
+        db.deposit(deposit);
+        return "Deposit - balance updated.";
+    }
+    public String withdraw(String acctType,String fname,String lname,String dob, double amount){
+        Account withdraw = setAccount(acctType,fname,lname,dob,amount);
+        if(amount<=0){
+            return "Withdraw - cannot be 0 or negative.";
+        }
+        if(!db.withdraw(withdraw)){
+            if(!db.publicFind(withdraw).isSufficentFunds(amount)){
+                return "Withdraw - insufficient fund.";
+            }else if (db.publicFind(withdraw).isClosed()) {
+                return ("Account is closed.");
+            }else{
+                return (withdraw.getHolder().toString() + " " +
+                        withdraw.getType() + " is not in the database.");
+            }
+        }
+        return "Withdraw - balance updated.";
     }
     public String printCmd(String cmd){
         if(db.isEmpty()){
