@@ -118,7 +118,9 @@ public class HelloController {
     public void cleanUpExeptions(String fname, String lname, double amount, int loyal,String date,
                                  int code, String acctType){
         if(cmd.equals("O")){
-            System.out.println(model.open(fname,lname,amount,loyal,date,code,acctType));
+            outputText.setText(model.open(fname,lname,amount,loyal,date,code,acctType));
+        }else if(isPrintCmd){
+            outputText.setText(model.printCmd(cmd));
         }
 
     }
