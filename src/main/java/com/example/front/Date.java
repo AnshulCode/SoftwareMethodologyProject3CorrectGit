@@ -140,6 +140,9 @@ public class Date implements Comparable<Date> {
         return dateStr;
 
     }
+    public int getYear() {
+        return this.year;
+    }
 
     /**
      * Implements comapreTo function with Date

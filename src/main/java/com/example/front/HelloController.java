@@ -94,6 +94,8 @@ public class HelloController {
             return false;
         } else if (curr.compareTo(DOB) <= 0) {
             return false;
+        }else if(DOB.getYear()<1900){
+            return false;
         }
         return true;
     }
@@ -101,10 +103,7 @@ public class HelloController {
     private void selectCommand() {
         try {
             double amount = Double.parseDouble(amountInput.getText());
-            if (!dateCheck(dateInput.getText())) {
-                outputText.setText("Date of birth invalid");
-                return;
-            }
+
             if (acctType.equals("College Checking") && cmd.equals("O")) {
                 if (!checkCampusCode()) {
                     return;
@@ -139,16 +138,23 @@ public class HelloController {
      */
     public void cleanUpExeptions(String fname, String lname, double amount, int loyal, String date,
                                  int code, String acctType) {
-        if (cmd.equals("O")) {
-            outputText.setText(model.open(fname, lname, amount, loyal, date, code, acctType));
-        } else if (cmd.equals("UB") ||cmd.equals("PI") || cmd.equals("PT")||cmd.equals("P")) {
+
+        if (cmd.equals("UB") ||cmd.equals("PI") || cmd.equals("PT")||cmd.equals("P")) {
             outputText.setText(model.printCmd(cmd));
-        } else if (cmd.equals("C")) {
-            outputText.setText(model.close(fname, lname, date, acctType));
-        } else if (cmd.equals("D")) {
-            outputText.setText(model.deposit(acctType, fname, lname, date, amount));
         } else {
-            outputText.setText(model.withdraw(acctType, fname, lname, date, amount));
+            if (!dateCheck(dateInput.getText())) {
+                outputText.setText("Date of birth invalid");
+                return;
+            }
+            if (cmd.equals("O")) {
+                outputText.setText(model.open(fname, lname, amount, loyal, date, code, acctType));
+            } else if (cmd.equals("C")) {
+                outputText.setText(model.close(fname, lname, date, acctType));
+            } else if (cmd.equals("D")) {
+                outputText.setText(model.deposit(acctType, fname, lname, date, amount));
+            } else {
+                outputText.setText(model.withdraw(acctType, fname, lname, date, amount));
+            }
         }
 
     }

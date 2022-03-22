@@ -105,13 +105,16 @@ public class Model {
             return "Withdraw - cannot be 0 or negative.";
         }
         if(!db.withdraw(withdraw)){
+            if(db.publicFind(withdraw) == null){
+                return withdraw.getHolder().toString() + " " +
+                        withdraw.getType() + " is not in the database.";
+            }
             if(!db.publicFind(withdraw).isSufficentFunds(amount)){
                 return "Withdraw - insufficient fund.";
             }else if (db.publicFind(withdraw).isClosed()) {
                 return ("Account is closed.");
-            }else{
-                return (withdraw.getHolder().toString() + " " +
-                        withdraw.getType() + " is not in the database.");
+            }else {
+
             }
         }
         return "Withdraw - balance updated.";
