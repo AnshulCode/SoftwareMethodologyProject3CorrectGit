@@ -26,13 +26,21 @@ public class Model {
             if(amount <= 0){
                 return "Initial deposit cannot be 0 or negative";
             }
-
+            if(db.publicFind(add)!= null){
+                if(db.publicFind(add).getType().equals(add.getType())){
+                    if(db.open(add)){
+                        return "Account reopened";
+                    }
+                }
+            }
             if(!db.open(add)){
                 return add.getHolder().toString() + " " + "same " +
                         "account(type) is in the database.";
+            }else{
+                return "Account Opened.";
             }
 
-            return "Account Opened.";
+
 
     }
 
@@ -64,7 +72,7 @@ public class Model {
             return new Checking(new Profile(fname,lname,dob),amount);
         }else if(acctType.equals("Money Market")){
             return new MoneyMarket(new Profile(fname,lname,dob),amount);
-        }else if(acctType.equals("Money Market")){
+        }else if(acctType.equals("Savings")){
             return new Savings(new Profile(fname,lname,dob),amount,1);
         }else if(acctType.equals("College Checking")){
             return new CollegeChecking(new Profile(fname,lname,dob),amount,1);
@@ -80,9 +88,13 @@ public class Model {
         if (db.publicFind(deposit) == null) {
             return (deposit.getHolder().toString() + " " +
                     deposit.getType() + " is not in the database.");
-        }
-        if (db.publicFind(deposit).isClosed()) {
+        }else if (db.publicFind(deposit).isClosed()) {
             return ("Account closed.");
+        } else if (db.publicFind(deposit) != null) {
+            if(!db.publicFind(deposit).getType().equals(deposit.getType())){
+                return (deposit.getHolder().toString() + " " +
+                        deposit.getType() + " is not in the database.");
+            }
         }
         db.deposit(deposit);
         return "Deposit - balance updated.";
