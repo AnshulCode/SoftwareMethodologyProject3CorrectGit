@@ -8,24 +8,7 @@ package com.example.front;
 public class ManagerForAccountDB {
     private AccountDatabase db;
 
-    public void testState(boolean testState){
-        if(testState){
-            db.open(new CollegeChecking(new Profile("John","Doe","2/19/1989"),599.99,0));
-            db.open(new CollegeChecking(new Profile("Jane","Doe","10/1/1995"),599.99,0));
-            db.open(new Savings(new Profile("Jane","Doe","10/1/1995"),1000,0));
-            db.open(new MoneyMarket(new Profile("Jane","Doe","10/1/1995"),2500));
-            db.open(new Checking(new Profile("April","March","1/15/1987"),300));
-            db.open(new Savings(new Profile("April","March","1/15/1987"),1500,1));
-            db.open(new MoneyMarket(new Profile("Roy","Brooks","10/31/1979"),2909.1));
-            db.open(new CollegeChecking(new Profile("Chris","Young","9/20/2001"),200,1));
-            db.open((new CollegeChecking(new Profile("Duke","Ellington","11/2/2002"),200,1)));
-            db.open(new CollegeChecking(new Profile("Kate","Lindsey","11/2/2002"),200,1));
-            db.open(new CollegeChecking(new Profile("Kate","Lindsey","8/31/2001"),450,2));
-            db.open(new Savings(new Profile("John","Doe","2/19/1990"),200,0));
-        }
 
-
-    }
 
 
 
@@ -34,7 +17,6 @@ public class ManagerForAccountDB {
      */
     public ManagerForAccountDB(){
         this.db = new AccountDatabase();
-        this.testState(true);
     }
 
     /**
@@ -175,7 +157,7 @@ public class ManagerForAccountDB {
      * @param lname
      * @param dob
      * @param amount
-     * @return
+     * @return Message
      */
     public String withdraw(String acctType,String fname,String lname,String dob, double amount){
         Account withdraw = setAccount(acctType,fname,lname,dob.trim(),amount);
@@ -200,19 +182,19 @@ public class ManagerForAccountDB {
     /**
      * handles print commands
      * @param cmd
-     * @return
+     * @return Accounts is DB.
      */
     public String printCmd(String cmd){
         if(db.isEmpty()){
             return "Account Database is empty";
-        }
-        if(cmd.equals("P")){
-            return db.print();
-        }
-        if(cmd.equals("PI")){
+        }else if(cmd.equals("P")){
+            String output = "*list of accounts in the database*\n";
+            output+=db.print();
+            output+="*end of list*";
+            return output;
+        }else if(cmd.equals("PI")){
             return db.printFeeAndInterest();
-        }
-        if(cmd.equals("PT")){
+        }else if(cmd.equals("PT")){
             return db.printByAccountType();
         }
         return db.updateAccounts();

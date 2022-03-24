@@ -16,6 +16,7 @@ public class BankTellerController {
     @FXML
     public RadioButton MM, CC, Checking, S;
 
+
     @FXML
     public TextField nameInput, nameInput1, dateInput, amountInput, campusCode, loyalty;
 
@@ -47,10 +48,18 @@ public class BankTellerController {
         if(!isPrintCmd){
                 if ((this.cmd == null || this.acctType == null)) {
                     return true;
-                } else if (((nameInput1.getText().isEmpty()) || (nameInput.getText().isEmpty()) ||
-                        (dateInput.getText().isEmpty())
-                        || (amountInput.getText().isEmpty()))) {
-                    return true;
+                } else if (!isCloseCmd) {
+                    if(((nameInput1.getText().isEmpty()) || (nameInput.getText().isEmpty()) ||
+                            (dateInput.getText().isEmpty())
+                            || (amountInput.getText().isEmpty()))){
+                        return true;
+
+                    }
+                }else{
+                    if(((nameInput1.getText().isEmpty()) || (nameInput.getText().isEmpty()) ||
+                            (dateInput.getText().isEmpty()))){
+                        return true;
+                    }
                 }
         }
         return false;
@@ -148,6 +157,7 @@ public class BankTellerController {
      */
     private void checkForMoreFaults() {
         try {
+
             double amount = Double.parseDouble(amountInput.getText().trim());
 
             if (acctType.equals("College Checking") && cmd.equals("O")) {
@@ -170,6 +180,10 @@ public class BankTellerController {
         } catch (NumberFormatException e) {
             if(!isPrintCmd){
                 outputText.setText("Invalid Amount");
+            }
+            if(isCloseCmd){
+                cleanUpExeptions(nameInput.getText().trim(), nameInput1.getText().trim(),
+                        0, 0, dateInput.getText(), 0, acctType);
             }
         }
 
