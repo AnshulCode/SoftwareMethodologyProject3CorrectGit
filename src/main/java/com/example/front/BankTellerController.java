@@ -36,6 +36,7 @@ public class BankTellerController {
     private String cmd;
     private boolean isCloseCmd;
     private boolean isCmdInPlaceState;
+    private final int CAMDENCODE = 2;
     private boolean isPrintCmd;
     private boolean isOpencmd;
 
@@ -121,7 +122,7 @@ public class BankTellerController {
         }
         try {
             int code = Integer.parseInt(campusCode.getText().trim());
-            if (!(code == 0 || code == 1 || code == 2)) {
+            if (!(code == 0 || code == 1 || code == CAMDENCODE)) {
                 outputText.setText("Improper Campus Code");
                 return false;
             }
@@ -157,7 +158,6 @@ public class BankTellerController {
      */
     private void checkForMoreFaults() {
         try {
-
             double amount = Double.parseDouble(amountInput.getText().trim());
 
             if (acctType.equals("College Checking") && cmd.equals("O")) {
@@ -180,8 +180,7 @@ public class BankTellerController {
         } catch (NumberFormatException e) {
             if(!isPrintCmd){
                 outputText.setText("Invalid Amount");
-            }
-            if(isCloseCmd){
+            }else if(isCloseCmd){
                 cleanUpExeptions(nameInput.getText().trim(), nameInput1.getText().trim(),
                         0, 0, dateInput.getText(), 0, acctType);
             }
