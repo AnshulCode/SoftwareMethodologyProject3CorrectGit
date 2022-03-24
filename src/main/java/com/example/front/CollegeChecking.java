@@ -16,7 +16,7 @@ public class CollegeChecking extends Checking {
     private static final String CAMDEN = "CAMDEN";
     private static final String NEWARK = "NEWARK";
     private static final String TYPE = "College Checking";
-
+    private final double  rateVar = (0.0025 / 12);
 
     private int location;
 
@@ -33,7 +33,6 @@ public class CollegeChecking extends Checking {
         super.holder = holder;
         super.balance = balance;
         this.location = location;
-        double rateVar = 0.0025 / 12;
         super.rate = rateVar;
 
     }

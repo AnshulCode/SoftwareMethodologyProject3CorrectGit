@@ -1,5 +1,7 @@
 package com.example.front;
 
+import java.util.Locale;
+
 /**
  * The type Profile.
  *

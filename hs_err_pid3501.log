@@ -16,7 +16,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=52138:/Applications/IntelliJ IDEA CE.app/Contents/bin -Dfile.encoding=UTF-8 --module-path=/Users/anshulprasad/Documents/Software Methodology/Front/target/classes:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-mac.jar -Djdk.module.main=com.example.front com.example.front/com.example.front.HelloApplication
+Command Line: -javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=52138:/Applications/IntelliJ IDEA CE.app/Contents/bin -Dfile.encoding=UTF-8 --module-path=/Users/anshulprasad/Documents/Software Methodology/Front/target/classes:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-mac.jar -Djdk.module.main=com.example.front com.example.front/com.example.front.BankTellerApplication
 
 Host: "MacBookPro14,2" x86_64 3500 MHz, 4 cores, 8G, Darwin 21.4.0, macOS 12.3 (21E230)
 Time: Mon Mar 21 11:23:09 2022 EDT elapsed time: 0.558809 seconds (0d 0h 0m 0s)
@@ -943,7 +943,7 @@ Dynamic libraries:
 
 VM Arguments:
 jvm_args: -javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=52138:/Applications/IntelliJ IDEA CE.app/Contents/bin -Dfile.encoding=UTF-8 --module-path=/Users/anshulprasad/Documents/Software Methodology/Front/target/classes:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1-mac.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-mac.jar -Djdk.module.main=com.example.front 
-java_command: com.example.front/com.example.front.HelloApplication
+java_command: com.example.front/com.example.front.BankTellerApplication
 java_class_path (initial): /Users/anshulprasad/.m2/repository/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1.jar:/Users/anshulprasad/.m2/repository/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1.jar
 Launcher Type: SUN_STANDARD
 

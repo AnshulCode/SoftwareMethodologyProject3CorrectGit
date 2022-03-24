@@ -90,6 +90,7 @@ public abstract class Account {
         return this.holder;
     }
 
+
     /**
      * checks if accounts are equal
      *

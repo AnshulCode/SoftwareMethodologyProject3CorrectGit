@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <BorderPane prefHeight="400.0" prefWidth="606.0">
             <top>
@@ -21,29 +28,37 @@
                         <Text layoutX="19.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" />
                         <AnchorPane layoutY="259.0" prefHeight="210.0" prefWidth="212.0">
                             <children>
-                                <RadioButton fx:id="D" layoutX="-1.0" layoutY="39.0" mnemonicParsing="false" onAction="#getCmd" text="Deposit">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="cmds" />
-                           </toggleGroup></RadioButton>
-                                <RadioButton fx:id="C" layoutX="-1.0" layoutY="57.0" mnemonicParsing="false" onAction="#getCmd" text="Close" toggleGroup="$cmds" />
-                                <RadioButton fx:id="O" layoutY="83.0" mnemonicParsing="false" onAction="#getCmd" text="Open" toggleGroup="$cmds" />
-                                <RadioButton fx:id="W" layoutX="3.0" layoutY="14.0" mnemonicParsing="false" onAction="#getCmd" text="Withdraw" toggleGroup="$cmds" />
-                                <RadioButton fx:id="P" layoutY="107.0" mnemonicParsing="false" onAction="#getCmd" text="print" toggleGroup="$cmds" />
-                                <RadioButton fx:id="PI" layoutX="3.0" layoutY="136.0" mnemonicParsing="false" onAction="#getCmd" prefHeight="17.0" prefWidth="98.0" text="printFeeInt" toggleGroup="$cmds" />
-                                <RadioButton fx:id="UB" layoutY="154.0" mnemonicParsing="false" onAction="#getCmd" text="updateInterest" toggleGroup="$cmds" />
-                        <RadioButton fx:id="PT" layoutX="3.0" layoutY="178.0" mnemonicParsing="false" onAction="#getCmd" prefHeight="18.0" prefWidth="136.0" text="printAccountType" toggleGroup="$cmds" />
-                                <AnchorPane layoutX="113.0" layoutY="9.0" prefHeight="149.0" prefWidth="144.0">
-                                    <children>
-                                        <RadioButton fx:id="Checking" layoutX="-1.0" layoutY="31.0" mnemonicParsing="false" onAction="#getAccountType" text="Checking">
+                        <Button fx:id="enterCmd" layoutX="368.0" layoutY="184.0" mnemonicParsing="false" onAction="#onClick" text="Action" />
+                        <HBox layoutY="14.0" prefHeight="87.0" prefWidth="427.0">
+                           <children>
+                                        <RadioButton fx:id="Checking" mnemonicParsing="false" onAction="#getAccountType" text="Checking">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="acctTypes" />
-                                 </toggleGroup></RadioButton>
-                                        <RadioButton fx:id="CC" layoutX="-1.0" layoutY="57.0" mnemonicParsing="false" onAction="#getAccountType" text="CollegeChecking" toggleGroup="$acctTypes" />
-                                        <RadioButton fx:id="S" layoutY="83.0" mnemonicParsing="false" onAction="#getAccountType" text="Savings" toggleGroup="$acctTypes" />
-                                        <RadioButton fx:id="MM" layoutY="5.0" mnemonicParsing="false" onAction="#getAccountType" text="MoneyMarket" toggleGroup="$acctTypes" />
-                              <Button fx:id="enterCmd" layoutX="117.0" layoutY="88.0" mnemonicParsing="false" onAction="#onClick" text="Action" />
-                                    </children>
-                                </AnchorPane>
+                                 </toggleGroup>
+                              </RadioButton>
+                                        <RadioButton fx:id="CC" mnemonicParsing="false" onAction="#getAccountType" text="CollegeChecking" toggleGroup="$acctTypes" />
+                                        <RadioButton fx:id="S" mnemonicParsing="false" onAction="#getAccountType" text="Savings" toggleGroup="$acctTypes" />
+                                        <RadioButton fx:id="MM" mnemonicParsing="false" onAction="#getAccountType" text="MoneyMarket" toggleGroup="$acctTypes" />
+                           </children>
+                        </HBox>
+                        <VBox layoutY="24.0" prefHeight="200.0" prefWidth="100.0" />
+                        <VBox layoutX="21.0" layoutY="42.0" prefHeight="168.0" prefWidth="127.0">
+                           <children>
+                                      <RadioButton fx:id="O" mnemonicParsing="false" onAction="#getCmd" text="Open">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="cmds" />
+                                 </toggleGroup>
+                              </RadioButton>
+                                      <RadioButton fx:id="C" mnemonicParsing="false" onAction="#getCmd" text="Close" toggleGroup="$cmds" />
+                                      <RadioButton fx:id="D" mnemonicParsing="false" onAction="#getCmd" text="Deposit" toggleGroup="$cmds" />
+                                      <RadioButton fx:id="W" mnemonicParsing="false" onAction="#getCmd" text="Withdraw" toggleGroup="$cmds" />
+                                      <RadioButton fx:id="P" mnemonicParsing="false" onAction="#getCmd" text="print" toggleGroup="$cmds" />
+                              <RadioButton fx:id="PT" mnemonicParsing="false" onAction="#getCmd" prefHeight="18.0" prefWidth="136.0" text="printAccountType" toggleGroup="$cmds" />
+                                      <RadioButton fx:id="PI" mnemonicParsing="false" onAction="#getCmd" prefHeight="17.0" prefWidth="98.0" text="printFeeInt" toggleGroup="$cmds" />
+                                      <RadioButton fx:id="UB" mnemonicParsing="false" onAction="#getCmd" text="updateInterest" toggleGroup="$cmds" />
+                           </children>
+                        </VBox>
+
                             </children>
                         </AnchorPane>
 
@@ -57,9 +72,9 @@
                     </children>
                 </AnchorPane>
             </left>
-            <center>
-                <TextArea fx:id="outputText" prefHeight="383.0" prefWidth="294.0" BorderPane.alignment="CENTER" />
-            </center>
+         <center>
+                <TextArea fx:id="outputText" prefHeight="478.0" prefWidth="216.0" BorderPane.alignment="CENTER" />
+         </center>
         </BorderPane>
     </children>
 </AnchorPane>
