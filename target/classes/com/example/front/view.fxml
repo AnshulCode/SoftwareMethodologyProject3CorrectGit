@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <BorderPane prefHeight="400.0" prefWidth="606.0">
             <top>
@@ -20,7 +13,7 @@
             <left>
                 <AnchorPane fx:id="inputPane" prefHeight="405.0" prefWidth="309.0" BorderPane.alignment="CENTER">
                     <children>
-                        <TextField id="name" fx:id="nameInput" layoutX="14.0" layoutY="9.0" />
+                        <TextField id="name" fx:id="fNameInput" layoutX="14.0" layoutY="9.0" />
                         <TextField id="date" fx:id="dateInput" layoutX="14.0" layoutY="108.0" />
                         <TextField id="amount" fx:id="amountInput" layoutX="14.0" layoutY="150.0" />
                         <Text layoutX="15.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" />
@@ -31,14 +24,14 @@
                         <Button fx:id="enterCmd" layoutX="368.0" layoutY="184.0" mnemonicParsing="false" onAction="#onClick" text="Action" />
                         <HBox layoutY="14.0" prefHeight="87.0" prefWidth="427.0">
                            <children>
-                                        <RadioButton fx:id="Checking" mnemonicParsing="false" onAction="#getAccountType" text="Checking">
+                                        <RadioButton fx:id="checkingButton" mnemonicParsing="false" onAction="#getAccountType" text="Checking">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="acctTypes" />
                                  </toggleGroup>
                               </RadioButton>
-                                        <RadioButton fx:id="CC" mnemonicParsing="false" onAction="#getAccountType" text="CollegeChecking" toggleGroup="$acctTypes" />
-                                        <RadioButton fx:id="S" mnemonicParsing="false" onAction="#getAccountType" text="Savings" toggleGroup="$acctTypes" />
-                                        <RadioButton fx:id="MM" mnemonicParsing="false" onAction="#getAccountType" text="MoneyMarket" toggleGroup="$acctTypes" />
+                                        <RadioButton fx:id="collegeCheckingButton" mnemonicParsing="false" onAction="#getAccountType" text="CollegeChecking" toggleGroup="$acctTypes" />
+                                        <RadioButton fx:id="savingsButton" mnemonicParsing="false" onAction="#getAccountType" text="Savings" toggleGroup="$acctTypes" />
+                                        <RadioButton fx:id="moneyMarketButton" mnemonicParsing="false" onAction="#getAccountType" text="MoneyMarket" toggleGroup="$acctTypes" />
                            </children>
                         </HBox>
                         <VBox layoutY="24.0" prefHeight="200.0" prefWidth="100.0" />
@@ -67,7 +60,7 @@
 
                         <TextField fx:id="loyalty" layoutX="14.0" layoutY="235.0" />
                         <Text layoutX="13.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loyalty" />
-                  <TextField id="name" fx:id="nameInput1" layoutX="14.0" layoutY="65.0" />
+                  <TextField id="name" fx:id="lNameInput" layoutX="14.0" layoutY="65.0" />
                   <Text layoutX="15.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" />
                     </children>
                 </AnchorPane>

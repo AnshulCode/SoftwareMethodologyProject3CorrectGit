@@ -14,11 +14,11 @@ import javafx.scene.control.Button;
 public class BankTellerController {
 
     @FXML
-    public RadioButton MM, CC, Checking, S;
+    public RadioButton moneyMarketButton, collegeCheckingButton, checkingButton, savingsButton;
 
 
     @FXML
-    public TextField nameInput, nameInput1, dateInput, amountInput, campusCode, loyalty;
+    public TextField fNameInput, lNameInput, dateInput, amountInput, campusCode, loyalty;
 
     @FXML
     public TextArea outputText;
@@ -50,14 +50,14 @@ public class BankTellerController {
                 if ((this.cmd == null || this.acctType == null)) {
                     return true;
                 } else if (!isCloseCmd) {
-                    if(((nameInput1.getText().isEmpty()) || (nameInput.getText().isEmpty()) ||
+                    if(((lNameInput.getText().isEmpty()) || (fNameInput.getText().isEmpty()) ||
                             (dateInput.getText().isEmpty())
                             || (amountInput.getText().isEmpty()))){
                         return true;
 
                     }
                 }else{
-                    if(((nameInput1.getText().isEmpty()) || (nameInput.getText().isEmpty()) ||
+                    if(((lNameInput.getText().isEmpty()) || (fNameInput.getText().isEmpty()) ||
                             (dateInput.getText().isEmpty()))){
                         return true;
                     }
@@ -158,22 +158,22 @@ public class BankTellerController {
      */
     private void checkForMoreFaults() {
         try {
+            
             double amount = Double.parseDouble(amountInput.getText().trim());
-
             if (acctType.equals("College Checking") && cmd.equals("O")) {
                 if (!checkCampusCode()) {
                     return;
                 }
-                cleanUpExeptions(nameInput.getText().trim(), nameInput1.getText().trim(),
+                cleanUpExeptions(fNameInput.getText().trim(), lNameInput.getText().trim(),
                         amount, 0, dateInput.getText(), Integer.parseInt(campusCode.getText()), acctType);
             } else if (acctType.equals("Savings") && cmd.equals("O")) {
                 if (!checkLoyaltyCode()) {
                     return;
                 }
-                cleanUpExeptions(nameInput.getText().trim(), nameInput1.getText().trim(),
+                cleanUpExeptions(fNameInput.getText().trim(), lNameInput.getText().trim(),
                         amount, Integer.parseInt(loyalty.getText()), dateInput.getText(), 0, acctType);
             } else {
-                cleanUpExeptions(nameInput.getText().trim(), nameInput1.getText().trim(),
+                cleanUpExeptions(fNameInput.getText().trim(), lNameInput.getText().trim(),
                         amount, 0, dateInput.getText(), 0, acctType);
 
             }
@@ -181,7 +181,7 @@ public class BankTellerController {
             if(!isPrintCmd){
                 outputText.setText("Invalid Amount");
             }else if(isCloseCmd){
-                cleanUpExeptions(nameInput.getText().trim(), nameInput1.getText().trim(),
+                cleanUpExeptions(fNameInput.getText().trim(), lNameInput.getText().trim(),
                         0, 0, dateInput.getText(), 0, acctType);
             }
         }
@@ -189,8 +189,8 @@ public class BankTellerController {
     }
 
     /**
-     * Executes commands for AccountDB
-     * Includes all required params for running the commands
+     * Executes comoneyMarketButtonands for AccountDB
+     * Includes all required params for running the comoneyMarketButtonands
      * Sends correct responses to view
      * @param fname
      * @param lname
@@ -227,19 +227,19 @@ public class BankTellerController {
      */
     public void getAccountType(ActionEvent event) {
         if (cmd == null || isOpencmd) {
-            if (event.getSource() == MM) {
+            if (event.getSource() == moneyMarketButton) {
                 acctType = ("Money Market");
                 moneyMarketAndCheckingState();
             }
-            if (event.getSource() == CC) {
+            if (event.getSource() == collegeCheckingButton) {
                 acctType = ("College Checking");
                 this.collegeCheckingState();
             }
-            if (event.getSource() == Checking) {
+            if (event.getSource() == checkingButton) {
                 acctType = "Checking";
                 this.moneyMarketAndCheckingState();
             }
-            if (event.getSource() == S) {
+            if (event.getSource() == savingsButton) {
                 acctType = ("Savings");
                 this.savingsState();
             }
@@ -247,13 +247,13 @@ public class BankTellerController {
                 this.closeState();
             }
         } else {
-            if (event.getSource() == MM) {
+            if (event.getSource() == moneyMarketButton) {
                 acctType = ("Money Market");
-            } else if (event.getSource() == CC) {
+            } else if (event.getSource() == collegeCheckingButton) {
                 acctType = ("College Checking");
-            } else if (event.getSource() == Checking) {
+            } else if (event.getSource() == checkingButton) {
                 acctType = "Checking";
-            } else if (event.getSource() == S) {
+            } else if (event.getSource() == savingsButton) {
                 acctType = ("Savings");
             } else if (isCloseCmd) {
                 this.closeState();
@@ -267,33 +267,33 @@ public class BankTellerController {
      * set up IU for opening MoneyMarket  and Checking Account
      */
     public void moneyMarketAndCheckingState() {
-        this.nameInput.setDisable(false);
-        this.nameInput1.setDisable(false);
+        this.fNameInput.setDisable(false);
+        this.lNameInput.setDisable(false);
         this.amountInput.setDisable(false);
         this.dateInput.setDisable(false);
         this.campusCode.setDisable(true);
         this.loyalty.setDisable(true);
-        this.MM.setDisable(false);
-        this.CC.setDisable(false);
-        this.Checking.setDisable(false);
-        this.S.setDisable(false);
+        this.moneyMarketButton.setDisable(false);
+        this.collegeCheckingButton.setDisable(false);
+        this.checkingButton.setDisable(false);
+        this.savingsButton.setDisable(false);
     }
 
     /**
      * set UI for opening Savings account
      */
     public void savingsState() {
-        this.nameInput.setDisable(false);
-        this.nameInput1.setDisable(false);
+        this.fNameInput.setDisable(false);
+        this.lNameInput.setDisable(false);
         this.amountInput.setDisable(false);
         this.dateInput.setDisable(false);
         this.campusCode.setDisable(true);
         this.loyalty.setDisable(false);
-        this.Checking.setDisable(false);
-        this.S.setDisable(true);
-        this.MM.setDisable(false);
-        this.CC.setDisable(false);
-        this.S.setDisable(false);
+        this.checkingButton.setDisable(false);
+        this.savingsButton.setDisable(true);
+        this.moneyMarketButton.setDisable(false);
+        this.collegeCheckingButton.setDisable(false);
+        this.savingsButton.setDisable(false);
 
     }
 
@@ -301,16 +301,16 @@ public class BankTellerController {
      * set UI for opening Callege Checking Account
      */
     public void collegeCheckingState() {
-        this.nameInput.setDisable(false);
-        this.nameInput1.setDisable(false);
+        this.fNameInput.setDisable(false);
+        this.lNameInput.setDisable(false);
         this.amountInput.setDisable(false);
         this.dateInput.setDisable(false);
         this.campusCode.setDisable(false);
         this.loyalty.setDisable(true);
-        this.MM.setDisable(false);
-        this.CC.setDisable(false);
-        this.Checking.setDisable(false);
-        this.S.setDisable(false);
+        this.moneyMarketButton.setDisable(false);
+        this.collegeCheckingButton.setDisable(false);
+        this.checkingButton.setDisable(false);
+        this.savingsButton.setDisable(false);
     }
 
     /**
@@ -320,58 +320,58 @@ public class BankTellerController {
         this.amountInput.setDisable(true);
         this.campusCode.setDisable(true);
         this.loyalty.setDisable(true);
-        this.MM.setDisable(false);
-        this.CC.setDisable(false);
-        this.Checking.setDisable(false);
-        this.S.setDisable(false);
+        this.moneyMarketButton.setDisable(false);
+        this.collegeCheckingButton.setDisable(false);
+        this.checkingButton.setDisable(false);
+        this.savingsButton.setDisable(false);
     }
 
     /**
      * reset UI after print cmd
      */
     public void resetState() {
-        this.nameInput.setDisable(false);
-        this.nameInput1.setDisable(false);
+        this.fNameInput.setDisable(false);
+        this.lNameInput.setDisable(false);
         this.amountInput.setDisable(false);
         this.dateInput.setDisable(false);
         this.campusCode.setDisable(false);
         this.loyalty.setDisable(false);
-        this.MM.setDisable(false);
-        this.CC.setDisable(false);
-        this.Checking.setDisable(false);
-        this.S.setDisable(false);
+        this.moneyMarketButton.setDisable(false);
+        this.collegeCheckingButton.setDisable(false);
+        this.checkingButton.setDisable(false);
+        this.savingsButton.setDisable(false);
     }
 
     /**
      * set UI for print cmd
      */
     public void printState() {
-        this.nameInput.setDisable(true);
-        this.nameInput1.setDisable(true);
+        this.fNameInput.setDisable(true);
+        this.lNameInput.setDisable(true);
         this.amountInput.setDisable(true);
         this.dateInput.setDisable(true);
         this.campusCode.setDisable(true);
         this.loyalty.setDisable(true);
-        this.MM.setDisable(true);
-        this.CC.setDisable(true);
-        this.Checking.setDisable(true);
-        this.S.setDisable(true);
+        this.moneyMarketButton.setDisable(true);
+        this.collegeCheckingButton.setDisable(true);
+        this.checkingButton.setDisable(true);
+        this.savingsButton.setDisable(true);
     }
 
     /**
      * Set UI for deposit and withdraw
      */
     public void depositState() {
-        this.nameInput.setDisable(false);
-        this.nameInput1.setDisable(false);
+        this.fNameInput.setDisable(false);
+        this.lNameInput.setDisable(false);
         this.amountInput.setDisable(false);
         this.dateInput.setDisable(false);
         this.campusCode.setDisable(true);
         this.loyalty.setDisable(true);
-        this.MM.setDisable(false);
-        this.CC.setDisable(false);
-        this.Checking.setDisable(false);
-        this.S.setDisable(false);
+        this.moneyMarketButton.setDisable(false);
+        this.collegeCheckingButton.setDisable(false);
+        this.checkingButton.setDisable(false);
+        this.savingsButton.setDisable(false);
     }
 
     /**
@@ -400,7 +400,7 @@ public class BankTellerController {
     }
 
     /**
-     * Code for Radio Buttons for Commands
+     * Code for Radio Buttons for ComoneyMarketButtonands
      * @param event waits for radio buttons to be selected
      */
     public void getCmd(ActionEvent event) {

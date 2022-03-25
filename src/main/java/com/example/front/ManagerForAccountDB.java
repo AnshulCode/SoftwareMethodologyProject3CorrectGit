@@ -180,7 +180,7 @@ public class ManagerForAccountDB {
     }
 
     /**
-     * handles print commands
+     * handles print comoneyMarketButtonands
      * @param cmd
      * @return Accounts is DB.
      */

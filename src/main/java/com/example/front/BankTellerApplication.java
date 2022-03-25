@@ -22,7 +22,7 @@ public class BankTellerApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(BankTellerApplication.class.getResource("view.fxml"));
         BankTellerController controller = new BankTellerController();
         fxmlLoader.setController(controller);
-        Scene scene = new Scene(fxmlLoader.load(), 300, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 700, 600);
         stage.setTitle("Bank Teller");
         stage.setScene(scene);
         stage.show();
